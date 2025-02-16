@@ -300,14 +300,14 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # ---- Part A: PyTorch Model Prediction from CSV File ----
-    model_path = 'best_model.pth'
+    model_path = 'best_model.keras'
     if os.path.exists(model_path):
         # Instantiate the model architecture and load weights
         model = HealthModel(input_shape=(500, 6)).to(device)
         model.load_state_dict(torch.load(model_path, map_location=device))
         model.eval()
         
-        predicted_class, confidence = predict_heart_rhythm(model, "test_1.csv", window_size=500, device=device)
+        predicted_class, confidence = predict_heart_rhythm(model, "/Users/adarshashok/Downloads/treehacks/healthbot/src/test_1.csv", window_size=500, device=device)
         print("Model Prediction:")
         print(f"Heart Rhythm: {predicted_class}, Confidence: {confidence:.2f}")
     else:
